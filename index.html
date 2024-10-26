@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee Eligibility Checker</title>
+    <style>
+        /* General body styling */
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #74b9ff, #a29bfe);
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Container for the form */
+        .container {
+            width: 400px;
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+            text-align: center;
+        }
+
+        /* Heading style */
+        h2 {
+            margin-bottom: 20px;
+            color: #2d3436;
+        }
+
+        /* Input field and button styling */
+        input,
+        button {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            border-radius: 8px;
+            border: 1px solid #dfe6e9;
+            box-sizing: border-box;
+            font-size: 16px;
+        }
+
+        /* Button-specific styling */
+        button {
+            background-color: #0984e3;
+            color: white;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            font-weight: bold;
+        }
+
+        button:hover {
+            background-color: #74b9ff;
+        }
+
+        /* Result text styling */
+        #result {
+            margin-top: 15px;
+            font-size: 18px;
+            font-weight: bold;
+            color: #2ecc71;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h2>Evaluate Employee Eligibility</h2>
+        <form id="eligibility-form">
+            <input type="number" id="age" placeholder="Enter Age" required>
+            <input type="text" id="department" placeholder="Enter Department" required>
+            <input type="number" id="salary" placeholder="Enter Salary" required>
+            <input type="number" id="experience" placeholder="Enter Experience" required>
+            <button type="button" onclick="evaluateEligibility()">Check Eligibility</button>
+        </form>
+        <p id="result"></p>
+    </div>
+
+    <script>
+        function evaluateEligibility() {
+            const age = parseInt(document.getElementById('age').value);
+            const department = document.getElementById('department').value.trim();
+            const salary = parseInt(document.getElementById('salary').value);
+            const experience = parseInt(document.getElementById('experience').value);
+
+            let resultText = 'This employee is NOT eligible';
+
+            // Example rule: Age > 30, Department = 'Sales', Salary > 50000, or Experience > 5 years
+            if (((age > 30 && department == 'Sales') ||
+                (age < 25 && department == 'Marketing')) && (salary > 50000 || experience > 5)) {
+                resultText = 'This employee is eligible';
+            }
+            // "((age > 30 AND department = 'Marketing')) AND (salary >20000 OR experience > 5)"
+            else if ((age > 30 && department == 'Marketing') && (salary > 20000 || experience > 5)) {
+                resultText = 'This employee is eligible';
+            }
+
+            document.getElementById('result').textContent = resultText;
+        }
+    </script>
+</body>
+
+</html>
